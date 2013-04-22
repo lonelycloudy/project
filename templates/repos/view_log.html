@@ -1,0 +1,45 @@
+{% extends "layouts/mainlayout.html" %}
+{% load i18n %}
+{% load short_uri %}
+
+{%block title%}{{project.name}} - {{path}}{%endblock%}
+
+{% block extrastyle %}
+<style>
+  {{content_style|safe}}
+</style>
+{% endblock %}
+
+
+{%block main-block%}
+<p>
+    <strong><a href="{{project|url}}src/">{{project.name}}</a></strong>
+    <span>/</span>
+  {%for p in paths%}
+  
+  <strong><a class="filename" href="{{project|url}}src/{{p.url}}/">{{p.path}}</a></strong>
+  <span>/</span>
+  {%endfor%}    
+</p>
+
+<h4>{%trans "Revision"%} r{{rev}}</h4>
+<p>{%trans "Added by"%} <a href="/u/{{author}}/">{{author}}</a> <em>{{mtime|utc2loc}}</em></p>
+<p>
+  <div class="pretext">
+    {{msg|linebreaks}}
+  </div>
+</p>
+{%for p in cfiles%}
+<div>
+  <span><strong>{{p.action}}</strong></span>
+  <span>{{p.name}}</span>
+</div>
+{%endfor%}
+{%if content%}
+<p>
+  <div class="pretext">
+    {{content|safe}}
+  </div>
+<p>
+{%endif%}
+{%endblock%}

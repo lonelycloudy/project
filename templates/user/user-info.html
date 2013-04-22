@@ -1,0 +1,8 @@
+{%load short_uri%}
+<div class="span1">
+  <a href="{{user|url}}"> {%gravatar user.email user.name%}</a>
+</div>
+<div class="span6">
+  <strong><a href="{{user|url}}">{{user}}</a></strong>
+  <em>{{user.last_login}}</em>  
+</div>

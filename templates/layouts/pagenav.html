@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load short_uri %}
+
+<div class="pagination">
+    <ul>
+        <li class="disabled"><a href="#">{{ result_count }} {{ _('records!') }}</a></li>
+        <li class="prev disabled"><a href="{{first_page_uri}}" id="first">&larr; {{ _('first') }}</a></li>
+        {% if page.has_previous %}
+            <li class="prev"><a href="{{previous_page_uri}}" id="prev">{{ _('prev') }}</a></li>
+        {% else %}
+            <li class="prev disabled"><a href="#">{{ _('prev') }}</a></li>
+        {% endif %}
+        {% if page.has_next %}
+            <li class="next"><a href="{{next_page_uri}}" id="next">{{ _('next') }}</a></li>
+        {% else %}
+            <li class="next disabled"><a href="#">{{ _('next') }}</a></li>
+        {% endif %}
+        <li class="next disabled"><a href="{{last_page_uri}}" id="last">{{ _('last') }}</a></li>
+
+    </ul>
+</div>

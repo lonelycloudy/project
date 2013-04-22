@@ -1,0 +1,28 @@
+body {
+    padding-top: 60px;
+}
+.topbar .btn {
+    border: 0;
+}
+.container > footer p {
+    text-align: center;
+}
+
+.navlabel {
+    padding: 1px 3px 2px;
+    background-color: #F5F5F5;
+    font-size: 9.75px;
+    font-weight: bold;
+    color: #4183CF;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    margin-top: 2px;
+}
+
+.rowmargin{
+    margin-bottom: 5px;
+}

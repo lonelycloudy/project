@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>{%trans "change email"%}</title>
+  </head>
+  <body>
+    <div>
+    hi, <strong>{{user.name}}</strong>
+    </div>
+    <p>
+      {%trans "You can use this link to change your new email at our site!"%}
+    </p>
+    <div>
+      <p>
+	<a href="http://{{SITE_URL}}/verify/{{code}}/">
+	  http://{{SITE_URL}}/verify/{{code}}/
+	</a>
+      </p>
+    </div>
+    <div>
+      Thanks,
+      {{TEAM_NAME}}
+    </div>
+  </body>
+</html>

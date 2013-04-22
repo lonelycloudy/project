@@ -1,0 +1,68 @@
+{%extends "layouts/mainlayout.html"%}
+{%load i18n %}
+{%load short_uri %}
+
+{%block main-block%}
+    <div class="row rowmargin">
+        <div class="span16">
+        <h3 class="navlabel">{%trans 'Featured projects'%}</h3>
+        </div>
+        {%for prj in feature_prjs%}
+            {% if forloop.counter0 == 3 %}
+                </div>
+                <div class="row rowmargin">
+            {% endif %}
+        <div class="span5">
+            <h2>{{prj.project}}</h2>
+            <p>{{prj.desc|wikitext:prj.project}}</p>
+            <p><a class="btn" href="{{prj.project|url}}">{% trans 'View details' %} &raquo;</a></p>
+        </div>
+        {%endfor%}
+
+    </div>
+    <div class="row">
+        <div class="span9">
+        <h3  class="navlabel">{%trans 'Last logs'%}</h3>
+        {%for log in logs%}
+            <div class="row rowmargin">
+            {%include "user/activity.html" with log=log%}
+            </div>
+        {%endfor%}
+        </div>
+        <div class="span7">
+            <h3 class="navlabel">{%trans 'Hot projects'%}</h3>
+            {%for prj in hot_projects%}
+                <div class="row rowmargin">
+                    {%include "project/prj-info.html" with project=prj%}
+                </div>
+            {%endfor%}
+            <h3 class="navlabel">{%trans 'New projects'%}</h3>
+            {%for prj in new_projects%}
+                <div class="row rowmargin">
+                    {%include "project/prj-info.html" with project=prj%}
+                </div>
+            {%endfor%}
+
+            <h3 class="navlabel">{%trans 'Random projects'%}</h3>
+            {%for prj in random0_projects%}
+                <div class="row rowmargin">
+                    {%include "project/prj-info.html" with project=prj%}
+                </div>
+            {%endfor%}
+
+            <h3 class="navlabel">{%trans 'Random projects'%}</h3>
+            {%for prj in random1_projects%}
+                <div class="row rowmargin">
+                    {%include "project/prj-info.html" with project=prj%}
+                </div>
+            {%endfor%}
+
+            <h3 class="navlabel">{%trans 'Active Users'%}</h3>
+            {%for au in ausers%}
+                <div class="row rowmargin">
+                    {%include "user/user-info.html" with user=au%}
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+{%endblock%}

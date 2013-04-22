@@ -1,0 +1,34 @@
+{% load i18n %}
+{% load short_uri %}
+<div class="span1" valign='top'>
+    {% if not hide_owner_pic %}
+        <a href="/u/{{project.owner.name}}/">
+            {% gravatar project.owner.email project.owner.name %}
+        </a>
+    {% endif %}
+</div>
+<div {% if spancol %}class="{{ spancol }}"{% else %}class="span6"{% endif %}>
+    <div class="row rowmargin">
+        <div {% if spancol %}class="{{ spancol }}"{% else %}class="span6"{% endif %}>
+            {% if project.owner == user %}
+                <span>
+    <a href="{{project|url}}admin/"><img src="/img/prj_admin.png" title="admin"/></a>
+  </span>
+            {% endif %}
+            <span>
+    <img id="prj-public" class="thumbnail" src='/img/{{project.is_public|yesno:"unlock,lock"}}.png'
+         title="{{project.is_public|yesno:"public,private"}}">
+  </span>
+            <strong><a class="username" href="{{project.owner|url}}">{{ project.owner }}</a>
+                /
+                <a href="{{project|url}}">{{ project }}</a></strong>
+            <em>{{ project.ctime|date }}</em>
+        </div>
+    </div>
+    <div class="row rowmargin">
+        <div {% if spancol %}class="{{ spancol }}"{% else %}class="span6"{% endif %}>
+            {{ project.title|truncatechars:60 }}
+        </div>
+    </div>
+</div>
+

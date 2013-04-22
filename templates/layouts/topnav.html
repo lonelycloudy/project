@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load short_uri %}
+
+<div class="topbar">
+    <div class="fill">
+        <div class="container">
+            <a class="brand" href="/"><img style="width:80px;height:20px;" src='/img/Logo1.png'/></a>
+            <ul class="nav">
+                <li {% if pageindex == 'home' %}class="active"{% endif %}><a href="/">{% trans 'Home' %}</a></li>
+                <li {% if pageindex == 'allproject' %}class="active"{% endif %}><a href="/all/">
+                    <strong style="color:#fd8300">#</strong>
+                    {{ _("Projects") }}
+                </a></li>
+                <li><a href="http://code.taobao.org/p/taobaocode/wiki/SiteHelp/"><font
+                        color="#fd8300">{{ _("README") }}</font></a></li>
+            </ul>
+            <form class="pull-left" action="/all/" method="POST">
+                {%csrf_token%}
+                <input type="text" name="q" class="span3" placeholder="{% trans 'Search Project' %}"/>
+            </form>
+            {% if user.is_authenticated %}
+                <ul class="nav secondary-nav">
+                    <li><a href="/my">{{ user.name|title }}</a></li>
+                    <li class="dropdown" data-dropdown="dropdown">
+                        <a href="#" class="dropdown-toggle">{% trans 'Account' %}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/new">{% trans 'NewProject' %}</a></li>
+                            <li class="divider"></li>
+                            {% for menu in navmenus %}
+                            <li {% if menu.choice %}class="active"{% endif %}><a href="{{ menu.uri }}">{{ menu.txt }}</a></li>
+                            {% endfor %}
+                            <li class="divider"></li>
+                            <li><a href="/logout/">{{ _("Logout") }}</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/msg/">{{ _("Messages") }}</a></li>
+                    <li><span id='msg_count'>(0)</span></li>
+                </ul>
+            {% else %}
+                <p class="pull-right">
+                    <a href="/open/weibo/login/"><img src='/img/weibo_logo.png'/>{{ _("Weibo Login") }}</a>&nbsp;
+                    <a href="/open/taobao/login/"><img src='/img/tao.png'/>{{ _("Taobao Login") }}</a>
+                    ,
+                    <a href="/login/">{{ _("Login") }}</a>,
+                    <a href="/register/">{{ _("Register") }}</a>&nbsp;&nbsp;
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>

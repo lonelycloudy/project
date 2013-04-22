@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load i18n %}
+{% load short_uri %}
+<html>
+<head>
+    <title>{% block title %}Taocode{% endblock %} | More Code Fun</title>
+    {% include "common/header.html" %}
+    {% block stylesheet %}
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    {% endblock %}
+    {% block extrastyle %}{% endblock %}
+    {% block extrascript %}{% endblock %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            init_csrf();
+
+            {%block ready_js%}
+            {%endblock%}
+
+            {%if user.is_authenticated %}
+                start_auth_call();
+            {%else%}
+                start_call();
+            {%endif%}
+        });
+
+    </script>
+</head>
+<body>
+{% include "layouts/topnav.html" %}
+
+<div class="container-fluid">
+    <div class="sidebar">
+        <div class="well">
+            <div class="row">
+                <div class="span1">
+                    <a href="{{user|url}}">
+                        {% gravatar user.email user.name %}
+                    </a>
+                </div>
+                <div class="span2">{% trans "Last login:" %}<em><br>{{ user.ctime|date }}</em></div>
+            </div>
+            {% for k,v in leftmenus.items %}
+                <h5>{{ k }}</h5>
+                <ul>
+                    {% for menu in v %}
+                        <li {% if menu.choice %}class="active"{% endif %}><a href="{{ menu.uri }}">{{ menu.txt }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="content">
+        {% block main-block %}
+        {% endblock %}
+    </div>
+
+    {% include "common/footer.html" %}
+</div>
+{% include "common/stat.html" %}
+</body>
+</html>

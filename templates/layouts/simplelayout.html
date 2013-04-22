@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load i18n %}
+{% load short_uri %}
+<html>
+<head>
+    <title>{% block title %}Taocode{% endblock %} More code fun</title>
+    {% include "common/header.html" %}
+    {% block stylesheet %}
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    {% endblock %}
+    {% block extrastyle %}{% endblock %}
+    {% block extrascript %}{% endblock %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            init_csrf();
+
+            {%block ready_js%}
+            {%endblock%}
+
+            {%if user.is_authenticated %}
+                start_auth_call();
+            {%else%}
+                start_call();
+            {%endif%}
+        });
+
+    </script>
+    <style type="text/css">
+        .container {
+            width: 820px;
+        }
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            margin: 0 -20px;
+            -webkit-border-radius: 0 0 6px 6px;
+            -moz-border-radius: 0 0 6px 6px;
+            border-radius: 0 0 6px 6px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            box-shadow: 0 1px 2px rgba(0,0,0,.15);
+        }
+
+        .page-header {
+            background-color: #f5f5f5;
+            padding: 20px 20px 10px;
+            margin: -20px -20px 20px;
+        }
+
+        .content .span10,
+        .content .span4 {
+            min-height: 500px;
+        }
+        .content .span4 {
+            margin-left: 0;
+            padding-left: 19px;
+            border-left: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+{% include "layouts/topnav.html" %}
+<div class="container">
+    <div class="content">
+        <div class="page-header">
+            {% block pagename %}
+            {% endblock %}
+        </div>
+        <div class="row">
+            <div class="span10">
+                {% block main-block %}
+                {% endblock %}
+            </div>
+            <div class="span4">
+                {% block secord-block %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% include "common/footer.html" %}
+</div>
+{% include "common/stat.html" %}
+
+</body>
+</html>

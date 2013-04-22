@@ -1,0 +1,37 @@
+{% extends "layouts/mainlayout.html" %}
+{% load i18n %}
+{% load short_uri %}
+
+{%block title%}{{project.name}} - {{path}}{%endblock%}
+
+{% block extrastyle %}
+<style>
+  {{content_style|safe}}
+</style>
+{% endblock %}
+
+{%block pagename%}
+<a class="username" href="{{project.owner|url}}">{{project.owner}}</a> / {{pagename}}
+{%endblock%}
+
+{%block main-block%}
+<p>
+    <strong><a href="{{project|url}}src/">{{project.name}}</a></strong>
+    <span>/</span>
+  {%for p in paths%}
+  
+  <strong><a class="filename" href="{{project|url}}src/{{p.url}}/">{{p.path}}</a></strong>
+  <span>/</span>
+  {%endfor%}    
+</p>
+
+<h4>{%trans "Revision"%} r{{revN}} - r{{revM}}</h4>
+{%if content%}
+<p>
+  <div class="pretext">
+    {{content|safe}}
+  </div>
+<p>
+{%endif%}
+{%endblock%}
+

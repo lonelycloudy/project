@@ -1,0 +1,29 @@
+{% extends "layouts/simplelayout.html" %}
+{% load i18n %}
+{% load short_uri %}
+
+{% block title %}{% trans 'new project' %}{% endblock %}
+
+{% block pagename %}
+    <h4>{% trans 'new project' %}</h4>
+{% endblock %}
+{% block extrascript %}
+    <script type="text/javascript" src="/js/fclean.js"></script>
+{% endblock %}
+
+{% block main-block %}
+    <div class="row">
+        <div class="span10">
+            <form id="new-prj-form" action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <a class="btn primary" href="javascript:;" onclick="javascript:$('#new-prj-form').submit();">{% trans 'create' %}</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+
